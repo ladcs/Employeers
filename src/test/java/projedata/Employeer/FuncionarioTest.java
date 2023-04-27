@@ -32,7 +32,7 @@ public class FuncionarioTest
        Funcionario e3 = new Funcionario();
        e3.setName("Luciano");
        e3.setBirthDate(LocalDate.of(1992, 2, 19));
-       e3.setRemunaration(e3Remuneration);
+       e3.setRemuneration(e3Remuneration);
        e3.setJob("auxiliar");
 	      
        assertEquals(e1.getName(), "Garus");
