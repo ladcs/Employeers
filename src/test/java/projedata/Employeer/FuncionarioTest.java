@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 
 /**
- * Unit test for simple Funcionario.
+ * Unit test for class Funcionario.
  */
 public class FuncionarioTest 
 {
@@ -41,11 +41,11 @@ public class FuncionarioTest
        assertEquals(e1.getJob(), "mecanico");
        assertEquals(e2.getName(), "Rafael");
        assertEquals(e2.getBirthDate(), LocalDate.of(1994, 3, 5));
-       assertEquals(e1.getRemuneration(), e2Remuneration);
-       assertEquals(e1.getJob(), "programador");
+       assertEquals(e2.getRemuneration(), e2Remuneration);
+       assertEquals(e2.getJob(), "programador");
        assertEquals(e3.getName(), "Luciano");
        assertEquals(e3.getBirthDate(), LocalDate.of(1992, 2, 19));
-       assertEquals(e1.getRemuneration(), e3Remuneration);
-       assertEquals(e1.getJob(), "auxiliar");
+       assertEquals(e3.getRemuneration(), e3Remuneration);
+       assertEquals(e3.getJob(), "auxiliar");
 	  }
 }

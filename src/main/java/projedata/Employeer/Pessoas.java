@@ -1,7 +1,6 @@
 package projedata.Employeer;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * class Pessoa, base to class Funcionario. 
@@ -25,10 +24,5 @@ public class Pessoas {
 	
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
-	}
-	
-	public String birthDateDayMonthYear() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	    return this.birthDate.format(formatter);
 	}
 }
