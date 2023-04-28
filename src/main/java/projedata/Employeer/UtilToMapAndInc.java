@@ -9,18 +9,24 @@ import java.util.Map;
 public class UtilToMapAndInc {
 
   private Map<String, List<String>> mapJobAndPeople = new LinkedHashMap<>();
+  
+  UtilToMapAndInc () {
+    this.populateMap();
+  }
 
   final void populateMap() {
     CrudFuncionario crud = new CrudFuncionario();
 	  
     List<Funcionario> tableEmployeersData = crud.getAllFunc();
     
-    tableEmployeersData.stream()
-        .forEach(employeer -> {
-           String key = employeer.getJob();
-           String name = employeer.getName();
-           this.getMapJobAndPeople().computeIfAbsent(key, k -> new ArrayList<>()).add(name);
-        });
+    for(Funcionario employeer : tableEmployeersData) {
+      String job = employeer.getJob();
+      String name = employeer.getName();
+      if (!this.getMapJobAndPeople().containsKey(job)) {
+        this.mapJobAndPeople.put(job, new ArrayList<String>());
+      }
+      this.mapJobAndPeople.get(job).add(name);
+    }
   }
   
   public void incRemuneration() {
@@ -37,9 +43,5 @@ public class UtilToMapAndInc {
   
   public Map<String, List<String>> getMapJobAndPeople() {
     return mapJobAndPeople;
-  }
-
-  public void setMapJobAndPeople(Map<String, List<String>> mapJobAndPeople) {
-    this.mapJobAndPeople = mapJobAndPeople;
   }
 }
