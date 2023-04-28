@@ -1,36 +1,49 @@
 package projedata.Employeer;
 
 import java.util.List;
+
 import java.math.BigDecimal;
 
 public class CrudFuncionario {
-  public List<Funcionario> deleteName(String name) {
+  public void deleteByName(String name) {
     ModelFuncionario model = new ModelFuncionario();
+
     try {
-      return model.deletePerson(name);
+      model.deletePerson(name);
     } catch (Exception e) {
       e.printStackTrace();
-      return null;
     }
   }
   
-  public List<Funcionario> updateRemunaration(Funcionario employeer, BigDecimal value) {
+  public void updateRemunaration(Funcionario employeer, BigDecimal value) {
 	  ModelFuncionario model = new ModelFuncionario();
+
 	  try {
-        return model.updateRemuneration(employeer, value);
+        model.updateRemuneration(employeer, value);
 	  } catch (Exception e) {
         e.printStackTrace();
-        return null;
 	  }
   }
   
   public List<Funcionario> getAllFunc() {
     ModelFuncionario model = new ModelFuncionario();
+
     try {
       return model.findAll();
     } catch (Exception e) {
     	e.printStackTrace();
     	return null;
     }
+  }
+  
+  public Funcionario getFuncByName(String name) {
+	  ModelFuncionario model = new ModelFuncionario();
+
+	  try {
+        return model.findByName(name);
+	  } catch (Exception e) {
+        e.printStackTrace();
+        return null;
+	  }
   }
 }

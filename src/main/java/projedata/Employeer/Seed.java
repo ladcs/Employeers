@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 
@@ -17,23 +16,20 @@ public class Seed {
   }
 
   final void deleteIfExistTable() {
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mysql-employeers");
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
-    EntityTransaction transaction;
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("mysql-employeers");
+    EntityManager em = emf.createEntityManager();
     try {
-      transaction = entityManager.getTransaction();
-      transaction.begin();
+      em.getTransaction().begin();
       @SuppressWarnings("unchecked")
-      List<Funcionario> tableValues = entityManager.createQuery("FROM Funcionario").getResultList();
+      List<Funcionario> tableValues = em.createQuery("FROM Funcionario").getResultList();
       if(tableValues.size() > 0) {
-        entityManager.createNativeQuery("DROP TABLE Funcionario").executeUpdate();
+    	  em.createNativeQuery("DROP TABLE Funcionario").executeUpdate();
       }
       this.insertSeed();
-      transaction.commit();
       } catch(PersistenceException e) {
         e.printStackTrace();
       } finally {
-    	  entityManager.close();
+    	  em.close();
       }
   }
 
@@ -110,20 +106,20 @@ public class Seed {
     funcionarios.add(laura);
     funcionarios.add(heloisa);
     funcionarios.add(helena);
-    
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mysql-employeers");
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+      
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("mysql-employeers");
+    EntityManager em = emf.createEntityManager();
       
     try {
-      entityManager.getTransaction().begin();
+      em.getTransaction().begin();
       for(Funcionario funcionario : funcionarios) {
-      	entityManager.persist(funcionario);
+        em.persist(funcionario);
       }
-      entityManager.getTransaction().commit();
-      } catch (Exception e) {
-  	    entityManager.getTransaction().rollback();
-      } finally {
-    	  entityManager.close();
-      }
+      em.getTransaction().commit();
+    } catch (Exception e) {
+      em.getTransaction().rollback();
+    } finally {
+    	em.close();
     }
+  }
 }

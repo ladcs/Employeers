@@ -10,40 +10,41 @@ import javax.persistence.TypedQuery;
 
 public class ModelFuncionario {
   public List<Funcionario> deletePerson (String name) {
-    Funcionario entityToDelete = this.findByName(name);
-
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mysql-employeers");
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-    entityManager.getTransaction().begin();
-    entityManager.remove(entityToDelete);
-    entityManager.getTransaction().commit();
     
-    entityManager.close();
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("mysql-employeers");
+    EntityManager em = emf.createEntityManager();
+
+    Funcionario entityToDelete = em.find(Funcionario.class, this.findByName(name).getId());
+
+    em.getTransaction().begin();
+    em.remove(entityToDelete);
+    em.getTransaction().commit();
+    
+    em.close();
     
     return this.findAll();
     
   }
   
   public Funcionario findByName(String name) {
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mysql-employeers");
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("mysql-employeers");
+    EntityManager em = emf.createEntityManager();
     
-    TypedQuery<Funcionario> query =entityManager.createQuery("SELECT f FROM Funcionario f WHERE f.name = :name", Funcionario.class);
+    TypedQuery<Funcionario> query = em.createQuery("SELECT f FROM Funcionario f WHERE f.name = :name", Funcionario.class);
     query.setParameter("name", name);
     Funcionario funcName = query.getSingleResult();
-    entityManager.close();
+    em.close();
     
     return funcName;
   }
   
   public List<Funcionario> findAll() {
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mysql-employeers");
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("mysql-employeers");
+    EntityManager em = emf.createEntityManager();
     
     @SuppressWarnings("unchecked")
-    List<Funcionario> allFunc = entityManager.createQuery("FROM Funcionario").getResultList();
-    entityManager.close();
+    List<Funcionario> allFunc = em.createQuery("FROM Funcionario").getResultList();
+    em.close();
     
     return allFunc;
   }

@@ -20,6 +20,10 @@ public class Funcionario extends Pessoas {
 	private BigDecimal remuneration;
 	private String job;
 
+	public Long getId() {
+		return id;
+	}
+	
 	public BigDecimal getRemuneration() {
 		return remuneration;
 	}
