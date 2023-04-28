@@ -29,14 +29,14 @@ public class UtilToMapAndInc {
     }
   }
   
-  public void incRemuneration() {
+  public void incRemuneration(int inc) {
     CrudFuncionario crud = new CrudFuncionario();
-    
+    double porcent = 1 + inc * 0.01;
     List<Funcionario> tableEmployeersData = crud.getAllFunc();
     
     tableEmployeersData.stream()
         .forEach(employeer -> {
-           BigDecimal newRemuneration = new BigDecimal(employeer.getRemuneration().longValue() * 1.1);
+           BigDecimal newRemuneration = new BigDecimal(employeer.getRemuneration().longValue() * porcent);
            crud.updateRemunaration(employeer, newRemuneration);
         });
   }
