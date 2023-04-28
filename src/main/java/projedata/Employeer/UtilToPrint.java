@@ -50,7 +50,7 @@ private Map<String, List<String>> personInMonth = new HashMap<String, List<Strin
 		return personInMonth;
 	}
 
-	public void getEmployeerInMonth10And12(int month) {
+	public void getEmployeerInMonth(int month) {
     	List<Funcionario> tableEmployeersData = crud.getAllFunc();
     	
         List<String> employeersName = tableEmployeersData.stream()

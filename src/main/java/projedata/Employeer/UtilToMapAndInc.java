@@ -9,15 +9,14 @@ import java.util.Map;
 public class UtilToMapAndInc {
 
   private Map<String, List<String>> mapJobAndPeople = new LinkedHashMap<>();
+  private CrudFuncionario crud = new CrudFuncionario();
   
   UtilToMapAndInc () {
     this.populateMap();
   }
 
   final void populateMap() {
-    CrudFuncionario crud = new CrudFuncionario();
-	  
-    List<Funcionario> tableEmployeersData = crud.getAllFunc();
+    List<Funcionario> tableEmployeersData = this.crud.getAllFunc();
     
     for(Funcionario employeer : tableEmployeersData) {
       String job = employeer.getJob();
@@ -30,9 +29,8 @@ public class UtilToMapAndInc {
   }
   
   public void incRemuneration(int inc) {
-    CrudFuncionario crud = new CrudFuncionario();
     double porcent = 1 + inc * 0.01;
-    List<Funcionario> tableEmployeersData = crud.getAllFunc();
+    List<Funcionario> tableEmployeersData = this.crud.getAllFunc();
     
     tableEmployeersData.stream()
         .forEach(employeer -> {
