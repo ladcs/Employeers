@@ -2,6 +2,9 @@ package projedata.Employeer;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Funcionario extends Pessoas {
 	
 	Funcionario() {

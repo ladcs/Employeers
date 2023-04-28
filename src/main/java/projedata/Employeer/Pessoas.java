@@ -2,9 +2,12 @@ package projedata.Employeer;
 
 import java.time.LocalDate;
 
+import javax.persistence.MappedSuperclass;
+
 /**
  * class Pessoa, base to class Funcionario. 
  */
+@MappedSuperclass
 public class Pessoas {
 	
 	private String name;
